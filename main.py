@@ -41,7 +41,6 @@ while game_on:
     # collision with food
     if snake.head.distance(food) < 15:
         food.refresh()
-        score.score += 1
         score.update_score()
 
 
