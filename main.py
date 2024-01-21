@@ -11,11 +11,10 @@ screen.setup(width=650, height=650)
 screen.listen()
 screen.title("The Snake Game")
 screen.tracer(0)
-
 snake = Snake()
 food = Food()
 score = Scoreboard()
-#wall = Wall()
+wall = Wall()
 game_on = True
 
 screen.onkey(key='Left', fun=snake.turn_left)
@@ -26,6 +25,18 @@ while game_on:
     screen.update()
     time.sleep(0.1)
     snake.snake_move()
+    # collision with the wall
+    cur_x = snake.head.xcor()
+    cur_y = snake.head.ycor()
+    if cur_x > 285 or cur_y > 285 or cur_x < -285 or cur_y < -285:
+        score.game_over()
+        game_on = False
+
+    # collision with tail
+    if snake.tail_collision():
+        score.game_over()
+        game_on = False
+
 
     # collision with food
     if snake.head.distance(food) < 15:

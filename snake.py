@@ -36,6 +36,12 @@ class Snake:
         if self.head.heading() != 90:
             self.head.setheading(270)
 
+    def tail_collision(self):
+
+        for each in range(len(self.segments) - 1, 0, -1):
+            if self.segments[each].distance(self.head) < 5:
+                return True
+
 
 
 
